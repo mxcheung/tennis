@@ -12,7 +12,7 @@ import com.maxcheung.tennis.model.TennisMatch;
 
 public class TennisProgressServiceTest extends TennisTst {
 
-    private final int TIEBREAKER_GAMES_W0N = 6;
+    private static final int TIEBREAKER_GAMES_W0N = 6;
 
     private TennisProgressService tennisProgressService = new TennisProgressServiceImpl();
 
