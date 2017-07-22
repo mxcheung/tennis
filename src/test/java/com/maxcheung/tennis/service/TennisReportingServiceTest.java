@@ -9,11 +9,10 @@ import com.maxcheung.tennis.model.TennisMatch;
 import com.maxcheung.tennis.service.TennisReportingService;
 import com.maxcheung.tennis.service.TennisReportingServiceImpl;
 
-public class TennisReportingServiceTest  extends TennisTst {
-	
-	
+public class TennisReportingServiceTest extends TennisTst {
+
 	private TennisReportingService tennisReportingService;
-	
+
 	@Before
 	public void setup() {
 		tennisMatch = new TennisMatch(PLAYER_1, PLAYER_2);
@@ -45,7 +44,6 @@ public class TennisReportingServiceTest  extends TennisTst {
 		assertEquals("4-4", tennisReportingService.reportCurrentGameScore(tennisMatch));
 	}
 
-	
 	@Test
 	public void shouldReportCurrentTiebreakGameScoreOneAll() {
 		player1.setGame(6);
@@ -55,8 +53,6 @@ public class TennisReportingServiceTest  extends TennisTst {
 		assertEquals("1-1", tennisReportingService.reportCurrentGameScore(tennisMatch));
 	}
 
-
-	
 	@Test
 	public void shouldReportCurrentTiebreakGameDeuce() {
 		player1.setGame(6);
@@ -66,16 +62,13 @@ public class TennisReportingServiceTest  extends TennisTst {
 		assertEquals("Deuce", tennisReportingService.reportCurrentGameScore(tennisMatch));
 	}
 
-	
-	
 	@Test
 	public void shouldReportCurrentSetScoreOneAll() {
 		player1.setGame(1);
 		player2.setGame(1);
 		assertEquals("1-1", tennisReportingService.reportCurrentSetScore(tennisMatch));
 	}
-	
-	
+
 	@Test
 	public void shouldReportMatchScoreOneAllFifeenAll() {
 		player1.setGame(1);
@@ -84,12 +77,5 @@ public class TennisReportingServiceTest  extends TennisTst {
 		player2.setPoint(1);
 		assertEquals("1-1, 15-15", tennisReportingService.reportMatchScore(tennisMatch));
 	}
-
-	
-
-	
-
-
-
 
 }

@@ -13,21 +13,19 @@ public class PlayerServiceTest {
 
 	private PlayerService playerService;
 	private Player player;
-	
+
 	@Before
 	public void setup() {
 		playerService = new PlayerServiceImpl();
 		player = new Player("player 1");
 	}
-	
-	
+
 	@Test
 	public void shouldReturnAwardPoint() {
 		assertEquals(0, player.getPoint());
 		playerService.pointWonBy(player);
 		assertEquals(1, player.getPoint());
 	}
-
 
 	@Test
 	public void shouldReturnIncreaseGame() {

@@ -11,23 +11,21 @@ public class TennisReportingServiceImpl implements TennisReportingService {
 	public static final List<String> pointsDescription = Arrays.asList("love", "15", "30", "40");
 
 	private TennisProgressService tennisProgressService;
-	
-	public TennisReportingServiceImpl(){
+
+	public TennisReportingServiceImpl() {
 		tennisProgressService = new TennisProgressServiceImpl();
 	}
-	
 
-		
 	public String reportCurrentGameScore(TennisMatch tennisMatch) {
 		Boolean tiebreaker = tennisProgressService.isTieBreaker(tennisMatch);
 		return (tiebreaker) ? tieBreakGameDescription(tennisMatch) : standardGameDescription(tennisMatch);
-		
+
 	}
 
 	private String standardGameDescription(TennisMatch tennisMatch) {
 		Player player1 = tennisMatch.getPlayer1();
 		Player player2 = tennisMatch.getPlayer2();
-		
+
 		if (player1.getPoint() >= 3 && player2.getPoint() >= 3) {
 			return deuceOrAdvantage(tennisMatch, player1, player2);
 		} else {
@@ -38,7 +36,7 @@ public class TennisReportingServiceImpl implements TennisReportingService {
 	private String tieBreakGameDescription(TennisMatch tennisMatch) {
 		Player player1 = tennisMatch.getPlayer1();
 		Player player2 = tennisMatch.getPlayer2();
-		
+
 		if (player1.getPoint() >= 6 && player2.getPoint() >= 6) {
 			return deuceOrAdvantage(tennisMatch, player1, player2);
 		} else {
@@ -60,23 +58,18 @@ public class TennisReportingServiceImpl implements TennisReportingService {
 		return tennisMatch.getPlayer1().getGame() + "-" + tennisMatch.getPlayer2().getGame();
 	}
 
-
 	public String reportMatchScore(TennisMatch tennisMatch) {
-		String gameScore =   reportCurrentSetScore(tennisMatch);
+		String gameScore = reportCurrentSetScore(tennisMatch);
 		if (tennisProgressService.isLoveAll(tennisMatch)) {
 			return gameScore;
 		}
 		return gameScore + ", " + reportCurrentGameScore(tennisMatch);
 	}
-	
-	
+
 	private Player getLeadPlayer(TennisMatch tennisMatch) {
 		return tennisProgressService.getGameLeadPlayer(tennisMatch);
 	}
-	
 
-	
-	
 	private String getScoreDescription(int score) {
 		return pointsDescription.get(score);
 	}

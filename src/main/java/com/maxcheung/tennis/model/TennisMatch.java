@@ -1,7 +1,7 @@
 package com.maxcheung.tennis.model;
 
 public class TennisMatch {
-
+	
 	private Player player1;
 	private Player player2;
 	
