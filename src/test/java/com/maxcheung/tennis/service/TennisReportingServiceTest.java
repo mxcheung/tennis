@@ -36,12 +36,21 @@ public class TennisReportingServiceTest extends TennisTst {
     }
 
     @Test
-    public void shouldReportCurrentTiebreakGameScoreFourAll() {
+    public void shouldReportCurrentTiebreakGameScore() {
         player1.setGame(6);
         player2.setGame(6);
         player1.setPoint(4);
         player2.setPoint(4);
         assertEquals("4-4", tennisReportingService.reportCurrentGameScore(tennisMatch));
+        player1.setPoint(6);
+        player2.setPoint(6);
+        assertEquals("Deuce", tennisReportingService.reportCurrentGameScore(tennisMatch));
+        player1.setPoint(6);
+        player2.setPoint(4);
+        assertEquals("6-4", tennisReportingService.reportCurrentGameScore(tennisMatch));
+        player1.setPoint(4);
+        player2.setPoint(6);
+        assertEquals("4-6", tennisReportingService.reportCurrentGameScore(tennisMatch));
     }
 
     @Test

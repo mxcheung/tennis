@@ -5,7 +5,9 @@ import com.maxcheung.tennis.model.TennisMatch;
 
 public class TennisProgressServiceImpl implements TennisProgressService {
 
-    private static final int TIEBREAKER_GAMES_W0N = 6;
+    private static final int TIEBREAKER_GAMES_REQUIRED = 6;
+    private static final int STANDARD_POINTS_REQUIRED = 4;
+    private static final int TIMEBREAK_POINTS_REQUIRED = 7;
 
     @Override
     public Player getGameLeadPlayer(TennisMatch tennisMatch) {
@@ -17,10 +19,15 @@ public class TennisProgressServiceImpl implements TennisProgressService {
     @Override
     public Boolean isGameCompleted(TennisMatch tennisMatch) {
         Player leadPlayer = getGameLeadPlayer(tennisMatch);
-        if ((leadPlayer.getPoint() > 3) && playerLeadsOutright(tennisMatch)) {
+        int pointsRequired = getMininumGamePoints(tennisMatch);
+        if ((leadPlayer.getPoint() >= pointsRequired) && playerLeadsOutright(tennisMatch)) {
             return true;
         }
         return false;
+    }
+
+    private int getMininumGamePoints(TennisMatch tennisMatch) {
+        return (isTieBreaker(tennisMatch)) ? TIMEBREAK_POINTS_REQUIRED : STANDARD_POINTS_REQUIRED;
     }
 
     @Override
@@ -32,8 +39,8 @@ public class TennisProgressServiceImpl implements TennisProgressService {
 
     @Override
     public Boolean isTieBreaker(TennisMatch tennisMatch) {
-        return (tennisMatch.getPlayer1().getGame() == TIEBREAKER_GAMES_W0N)
-                && (tennisMatch.getPlayer2().getGame() == TIEBREAKER_GAMES_W0N);
+        return (tennisMatch.getPlayer1().getGame() == TIEBREAKER_GAMES_REQUIRED)
+                && (tennisMatch.getPlayer2().getGame() == TIEBREAKER_GAMES_REQUIRED);
     }
 
     private boolean playerLeadsOutright(TennisMatch tennisMatch) {

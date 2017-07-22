@@ -67,9 +67,7 @@ public class TennisReportingServiceImpl implements TennisReportingService {
     }
 
     private String deuceOrAdvantage(TennisMatch tennisMatch, Player player1, Player player2) {
-        if (Math.abs(player2.getPoint() - player1.getPoint()) >= 2) {
-            return "";
-        } else if (player1.getPoint() == player2.getPoint()) {
+        if (player1.getPoint() == player2.getPoint()) {
             return "Deuce";
         } else {
             return "Advantage " + getLeadPlayer(tennisMatch).getName();

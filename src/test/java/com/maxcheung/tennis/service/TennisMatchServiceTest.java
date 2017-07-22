@@ -31,6 +31,7 @@ public class TennisMatchServiceTest extends TennisTst {
     public void shouldReturnOpponent() {
         assertEquals(player1, tennisMatchService.getPlayerByName(tennisMatch, PLAYER_1));
         assertEquals(player2, tennisMatchService.getOpponentPlayer(tennisMatch, player1));
+        assertEquals(player1, tennisMatchService.getOpponentPlayer(tennisMatch, player2));
     }
 
     @Test
