@@ -13,18 +13,21 @@ public class TennisMatchServiceImpl implements TennisMatchService {
         tennisProgressService = new TennisProgressServiceImpl();
     }
 
+    @Override
     public Player getPlayerByName(TennisMatch tennisMatch, String playerName) {
         Player player1 = tennisMatch.getPlayer1();
         Player player2 = tennisMatch.getPlayer2();
         return (player1.getName().equalsIgnoreCase(playerName)) ? player1 : player2;
     }
 
+    @Override
     public Player getOpponentPlayer(TennisMatch tennisMatch, Player player) {
         Player player1 = tennisMatch.getPlayer1();
         Player player2 = tennisMatch.getPlayer2();
         return (player.getName().equalsIgnoreCase(player1.getName())) ? player2 : player1;
     }
 
+    @Override
     public void awardPoint(TennisMatch tennisMatch, String playerName) {
         Player player = getPlayerByName(tennisMatch, playerName);
         playerService.pointWonBy(player);

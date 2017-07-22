@@ -16,10 +16,32 @@ public class TennisReportingServiceImpl implements TennisReportingService {
         tennisProgressService = new TennisProgressServiceImpl();
     }
 
+    @Override
     public String reportCurrentGameScore(TennisMatch tennisMatch) {
         Boolean tiebreaker = tennisProgressService.isTieBreaker(tennisMatch);
         return (tiebreaker) ? tieBreakGameDescription(tennisMatch) : standardGameDescription(tennisMatch);
+    }
 
+    @Override
+    public String reportCurrentSetScore(TennisMatch tennisMatch) {
+        return tennisMatch.getPlayer1().getGame() + "-" + tennisMatch.getPlayer2().getGame();
+    }
+
+    @Override
+    public String reportMatchScore(TennisMatch tennisMatch) {
+        String gameScore = reportCurrentSetScore(tennisMatch);
+        if (tennisProgressService.isLoveAll(tennisMatch)) {
+            return gameScore;
+        }
+        return gameScore + ", " + reportCurrentGameScore(tennisMatch);
+    }
+
+    private Player getLeadPlayer(TennisMatch tennisMatch) {
+        return tennisProgressService.getGameLeadPlayer(tennisMatch);
+    }
+
+    private String getScoreDescription(int score) {
+        return pointsDescription.get(score);
     }
 
     private String standardGameDescription(TennisMatch tennisMatch) {
@@ -54,23 +76,4 @@ public class TennisReportingServiceImpl implements TennisReportingService {
         }
     }
 
-    public String reportCurrentSetScore(TennisMatch tennisMatch) {
-        return tennisMatch.getPlayer1().getGame() + "-" + tennisMatch.getPlayer2().getGame();
-    }
-
-    public String reportMatchScore(TennisMatch tennisMatch) {
-        String gameScore = reportCurrentSetScore(tennisMatch);
-        if (tennisProgressService.isLoveAll(tennisMatch)) {
-            return gameScore;
-        }
-        return gameScore + ", " + reportCurrentGameScore(tennisMatch);
-    }
-
-    private Player getLeadPlayer(TennisMatch tennisMatch) {
-        return tennisProgressService.getGameLeadPlayer(tennisMatch);
-    }
-
-    private String getScoreDescription(int score) {
-        return pointsDescription.get(score);
-    }
 }
