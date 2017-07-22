@@ -8,7 +8,12 @@ import com.maxcheung.tennis.model.TennisMatch;
 
 public class TennisReportingServiceImpl implements TennisReportingService {
 
+
     public static final List<String> pointsDescription = Arrays.asList("love", "15", "30", "40");
+
+    private static final String ADVANTAGE = "Advantage";
+    
+    private static final String DEUCE = "Deuce";
 
     private TennisProgressService tennisProgressService;
 
@@ -68,9 +73,9 @@ public class TennisReportingServiceImpl implements TennisReportingService {
 
     private String deuceOrAdvantage(TennisMatch tennisMatch, Player player1, Player player2) {
         if (player1.getPoint() == player2.getPoint()) {
-            return "Deuce";
+            return DEUCE;
         } else {
-            return "Advantage " + getLeadPlayer(tennisMatch).getName();
+            return ADVANTAGE + " " + getLeadPlayer(tennisMatch).getName();
         }
     }
 
