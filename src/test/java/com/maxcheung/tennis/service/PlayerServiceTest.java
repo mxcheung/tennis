@@ -6,32 +6,37 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.maxcheung.tennis.model.Player;
-import com.maxcheung.tennis.service.PlayerService;
-import com.maxcheung.tennis.service.PlayerServiceImpl;
 
-public class PlayerServiceTest {
+public class PlayerServiceTest extends TennisTst {
 
-    private PlayerService playerService;
     private Player player;
 
     @Before
     public void setup() {
-        playerService = new PlayerServiceImpl();
         player = new Player("player 1");
     }
 
     @Test
-    public void shouldReturnAwardPoint() {
+    public void shouldAwardPoint() {
         assertEquals(0, player.getPoint());
         playerService.pointWonBy(player);
         assertEquals(1, player.getPoint());
     }
 
     @Test
-    public void shouldReturnIncreaseGame() {
+    public void shouldAwardGame() {
         assertEquals(0, player.getGame());
         playerService.gameWonBy(player);
         assertEquals(1, player.getGame());
+        assertEquals(0, player.getPoint());
+    }
+
+    @Test
+    public void shouldResetPoints() {
+        assertEquals(0, player.getGame());
+        playerService.gameLostBy(player);
+        assertEquals(0, player.getGame());
+        assertEquals(0, player.getPoint());
     }
 
 }

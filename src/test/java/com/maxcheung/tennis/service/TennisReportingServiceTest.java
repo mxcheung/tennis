@@ -2,24 +2,9 @@ package com.maxcheung.tennis.service;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.maxcheung.tennis.model.TennisMatch;
-import com.maxcheung.tennis.service.TennisReportingService;
-import com.maxcheung.tennis.service.TennisReportingServiceImpl;
-
 public class TennisReportingServiceTest extends TennisTst {
-
-    private TennisReportingService tennisReportingService;
-
-    @Before
-    public void setup() {
-        tennisMatch = new TennisMatch(PLAYER_1, PLAYER_2);
-        player1 = tennisMatch.getPlayer1();
-        player2 = tennisMatch.getPlayer2();
-        tennisReportingService = new TennisReportingServiceImpl();
-    }
 
     @Test
     public void shouldReportCurrentGameScoreFifeenAll() {

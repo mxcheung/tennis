@@ -4,24 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.maxcheung.tennis.model.Player;
-import com.maxcheung.tennis.model.TennisMatch;
 
 public class TennisProgressServiceTest extends TennisTst {
-
-    private static final int TIEBREAKER_GAMES_W0N = 6;
-
-    private TennisProgressService tennisProgressService = new TennisProgressServiceImpl();
-
-    @Before
-    public void setup() {
-        tennisMatch = new TennisMatch(PLAYER_1, PLAYER_2);
-        player1 = tennisMatch.getPlayer1();
-        player2 = tennisMatch.getPlayer2();
-    }
 
     @Test
     public void shouldReturnGameLeadPlayer() {

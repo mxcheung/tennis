@@ -9,7 +9,7 @@ public class TennisMatch {
         this.player1 = new Player(player1);
         this.player2 = new Player(player2);
     }
-
+    
     public Player getPlayer1() {
         return player1;
     }
@@ -17,5 +17,4 @@ public class TennisMatch {
     public Player getPlayer2() {
         return player2;
     }
-
 }

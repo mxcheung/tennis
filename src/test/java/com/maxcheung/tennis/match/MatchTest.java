@@ -18,8 +18,6 @@ public class MatchTest {
 
     @Test
     public void shouldReturnScore() {
-        match = new Match(PLAYER_1, PLAYER_2);
-
         assertEquals("0-0", match.getScore());
         match.pointWonBy(PLAYER_1);
         match.pointWonBy(PLAYER_2);
